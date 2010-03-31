@@ -1,22 +1,16 @@
-Your Game Title
+Jornithopter
 ===============
 
-Entry in PyWeek #4  <http://www.pyweek.org/4/>
-Team: YOUR TEAM NAME (leave the "Team: bit")
-Members: YOUR TEAM MEMBERS (leave the "Members: bit")
+Dependencies
+-------------
 
+This game has the following dependencies:
 
-DEPENDENCIES:
+    * python 2.6                        http://www.python.org
+    * pyglet 1.1.4                      http://www.pyglet.org/
 
-You might need to install some of these before running the game:
-
-  Python:     http://www.python.org/
-  PyGame:     http://www.pygame.org/
-  PyOpenGL:   http://pyopengl.sf.net/
-
-
-
-RUNNING THE GAME:
+Running the Game
+----------------
 
 On Windows or Mac OS X, locate the "run_game.pyw" file and double-click it.
 
@@ -26,15 +20,16 @@ Othewise open a terminal / console and "cd" to the game directory and run:
 
 
 
-HOW TO PLAY THE GAME:
+Play the Game
+-------------
 
-Move the cursor around the screen with the mouse.
+Arrows to steer, most other keys to flap
 
-Press the left mouse button to fire the ducks.
+Land on top of other things to kill them.
 
 
+ENJOY!
 
-LICENSE:
-
-This game skellington is placed in the Public Domain.
-
+-- 
+Signature
+http://github.com/jseutter/pyweek10
