@@ -1,5 +1,5 @@
 Jornithopter
-===============
+============
 
 Dependencies
 -------------

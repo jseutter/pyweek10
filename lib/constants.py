@@ -24,11 +24,11 @@ DATA_DIR = "data"
 
 #: The name of the game used in locating the saved settings directory. Its best
 #: not to have any spaces in this name.
-CONFIG_NAME = "MyGame"
+CONFIG_NAME = "Jornithopter"
 
 #: The caption that appears at the top of the window. Obviously this is only
 #: visible in windowed mode.
-CAPTION = u"My Game"
+CAPTION = u"Jornithopter"
 
 #: The "top-level" tick rate; the maximum number of times per second that the
 #: controller will call its tick method.
