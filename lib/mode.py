@@ -69,6 +69,32 @@ class Mode(object):
 
         """
         self.keys = key.KeyStateHandler()
+        self.width_factor = 1
+        self.height_factor = 1
+
+    def _calc_width_height_factors(self):
+        '''
+        We will code for a given config.width and config.height (e.g. 800x600)
+        and we will use factors to convert to that. Effect is on larger screens
+        everything will zoom larger
+        '''
+        w,h = self.window.get_size()
+        wp,hp = config.width,config.height
+        self.width_factor = w/wp
+        self.height_factor = h/hp
+
+    def cx(self, x):
+        ''' Used to convert an x-ordinate or a width '''
+        return int(self.width_factor * x)
+
+    def cy(self, y):
+        ''' Used to convert an y-ordinate or a height '''
+        return int(self.height_factor * y)
+
+    def cxy(self, p):
+        ''' Used to convert an (x,y) co-ordinate or a (width,height) '''
+        x,y = p
+        return self.cx(x), self.cy(y)
 
     def connect(self, control):
         """Respond to the connecting controller.
@@ -81,6 +107,7 @@ class Mode(object):
         self.control = control
         self.window = control.window
         self.window.push_handlers(self.keys)
+        self._calc_width_height_factors()
 
     def disconnect(self):
         """Respond to the disconnecting controller.
