@@ -30,9 +30,8 @@ class Character(object):
 class Hero(Character):
     def __init__(self, *args, **kwargs):
         Character.__init__(self, *args, **kwargs)
-        bf = 10
-        box_width = int(config.width / bf)
-        box_height = int(config.height / bf) 
+        box_width = 50
+        box_height = 50
         box_start = int(config.width/2) - box_width//2, int(config.height/2) - box_height//2
         self.x,self.y = box_start
         self.width = box_width
@@ -89,6 +88,8 @@ def physical_delta(dt, dir, is_land, oldva):
     down_force = 0
     if is_land:
         side_res += GROUNDFRIC
+        if vyp < 0:
+            vyp = 0
     else:
         down_force = MASS * GRAVITY
     # Horizontal Force
@@ -112,7 +113,7 @@ def physical_delta(dt, dir, is_land, oldva):
     ax = x_force / MASS
     ay = y_force / MASS
 
-    # New Velocity 
+    # New Velocity
     vx = vxp + ax * dt
     vy = vyp + ay * dt
 
