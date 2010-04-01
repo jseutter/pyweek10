@@ -5,4 +5,8 @@ provides an __all__ specification for this purpose.
 
 """
 
-__all__ = []
+__all__ = ["debug_label"]
+
+from pyglet import text
+
+debug_label = text.Label("DEBUG", font_size=20, y=24)

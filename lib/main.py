@@ -19,7 +19,7 @@ import config
 from common import *
 from constants import *
 
-import examples
+import jornithopter
 
 
 class Controller(object):
