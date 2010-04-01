@@ -30,6 +30,6 @@ Land on top of other things to kill them.
 
 ENJOY!
 
--- 
-Signature
+----------
+Jornithopter Team
 http://github.com/jseutter/pyweek10
