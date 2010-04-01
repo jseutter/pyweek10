@@ -1,0 +1,12 @@
+# python compiled files
+*.pyc
+*.pyo
+
+# porygon error dump file
+error.log
+
+# vim swap
+*.swp
+
+# not sure where this file came from
+VERSION.txt
