@@ -10,6 +10,7 @@ __all__ = [
     "LEFT", "RIGHT", "UP",
     "LAND", "AIR",
     "MASS", "UPTHRUST", "SIDETHRUST", "GROUNDFRIC", "AIRFRIC", "GRAVITY",
+    "TERMINALVELOCITY",
 ]
 
 from pyglet import text
@@ -30,5 +31,7 @@ SIDETHRUST  = 100   # kg * m/s**2
 GROUNDFRIC  = 40    # kg * m/s**2
 AIRFRIC     = 20    # kg * m/s**2
 GRAVITY     = 9.80665 # m/s**2 accell due to grav
+
+TERMINALVELOCITY    = 20 # m/s (the fastest anything can get)
 
 

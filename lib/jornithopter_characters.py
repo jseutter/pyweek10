@@ -79,7 +79,7 @@ def physical_delta(dt, dir, is_land, oldva):
     is_land = is object travel on land or air
     oldva = tuple of old vx, vy, ax, ay
     '''
-    #dt seems tiny, make it BIGGER
+    # dt seems tiny, make it BIGGER
     dt = dt * 25
     # untar oldva
     vxp,vyp,axp,ayp = oldva
@@ -91,30 +91,52 @@ def physical_delta(dt, dir, is_land, oldva):
         side_res += GROUNDFRIC
     else:
         down_force = MASS * GRAVITY
-    side_force = 0
-    if dir & LEFT or dir & RIGHT:
-        side_force = SIDETHRUST - side_res
-        if side_force < 0:
-            side_force = 0
-    x_force = side_force
+    # Horizontal Force
+    x_force = 0
+    if vxp > 0:
+        x_force = -side_res
+    elif vxp < 0:
+        x_force = side_res
     if dir & LEFT:
-        x_force = -side_force
+        x_force += -SIDETHRUST
+    elif dir & RIGHT:
+        x_force += SIDETHRUST
+
+    # Vertical Force
     up_force = 0
     if dir & UP:
         up_force += UPTHRUST
     y_force = up_force - down_force
-    # use prev ax & ay to remove associated force so you get an
-    # elastic/natural movement not abrubt (i.e. FIXME force computation)
 
     # Acceleration
     ax = x_force / MASS
     ay = y_force / MASS
 
-    # Distance traveled
-    vx = ax * dt
-    vy = ay * dt
-    dx = vxp*dt + vx*dt/2
-    dy = vyp*dt + vy*dt/2
+    # New Velocity 
+    vx = vxp + ax * dt
+    vy = vyp + ay * dt
+
+    # Check to see if our resistance force will cause the item to move in an
+    # opposit direction and stop it. (Semi HACK)
+    if vxp !=0 and (vx / vxp < 0) and not (dir & LEFT or dir & RIGHT):
+        # dir change due to non SIDETHRUST force
+        vx = vxp = ax = 0
+
+    # HACK: cap the velocity at a terminal velocity
+    # Technically, terminal velocity should just happen
+    # if the air resistance was a dynamicly growing number
+    if vx > TERMINALVELOCITY:
+        vx = TERMINALVELOCITY
+    elif vx < -TERMINALVELOCITY:
+        vx = -TERMINALVELOCITY
+    if vy > TERMINALVELOCITY:
+        vy = TERMINALVELOCITY
+    elif vy < -TERMINALVELOCITY:
+        vy = -TERMINALVELOCITY
+
+    # calculate displacement
+    dx = ((vxp+vx)*dt)/2
+    dy = ((vyp+vy)*dt)/2
 
     if DEBUG:
         print 'd&oldav:', (dx,dy),(vx,vy,ax,ay)
