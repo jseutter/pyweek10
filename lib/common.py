@@ -10,7 +10,7 @@ __all__ = [
     "LEFT", "RIGHT", "UP",
     "LAND", "AIR",
     "MASS", "UPTHRUST", "SIDETHRUST", "GROUNDFRIC", "AIRFRIC", "GRAVITY",
-    "TERMINALVELOCITY",
+    "TERMINALVELOCITY", "UPTHRUST_DURATION"
 ]
 
 from pyglet import text
@@ -27,11 +27,11 @@ AIR,LAND = 0,1
 
 MASS        = 20    # kg (all travelling objects for now)
 UPTHRUST    = 300   # kg * m/s**2 (or what u call a Newton)
+UPTHRUST_DURATION   = 5 # Ticks until the upthrust is negated
 SIDETHRUST  = 100   # kg * m/s**2
 GROUNDFRIC  = 40    # kg * m/s**2
 AIRFRIC     = 20    # kg * m/s**2
 GRAVITY     = 9.80665 # m/s**2 accell due to grav
 
 TERMINALVELOCITY    = 20 # m/s (the fastest anything can get)
-
 

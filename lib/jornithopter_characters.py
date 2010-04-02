@@ -18,17 +18,20 @@ class Character(object):
         self.cx = self.parent.cx
         self.cy = self.parent.cy
         self.cxy = self.parent.cxy
+
     def update_pos(self, dt, direction):
         '''
         dt = time passed since last update
         direction = LEFT or RIGHT or UP or LEFT | UP or RIGHT | UP
         '''
         pass
+
     def draw(self):
         pass
 
 class Hero(Character):
     def __init__(self, *args, **kwargs):
+        self.last_uptick = 0
         Character.__init__(self, *args, **kwargs)
         box_width = 50
         box_height = 50
@@ -46,7 +49,8 @@ class Hero(Character):
         if self.y > 0:
             is_land = AIR
         (dx,dy),(self.vx,self.vy,self.ax,self.ay) = physical_delta(
-            dt, dir, is_land, (self.vx, self.vy, self.ax, self.ay))
+            dt, dir, is_land, (self.vx, self.vy, self.ax, self.ay),
+            self.last_uptick, self.parent.current_tick)
         self.x += dx
         self.y += dy
         if self.y < 0:
@@ -72,7 +76,7 @@ class Hero(Character):
         pyglet.graphics.draw(4, pyglet.gl.GL_POLYGON, ('v2i', cps))
 
 
-def physical_delta(dt, dir, is_land, oldva):
+def physical_delta(dt, dir, is_land, oldva, last_uptick, current_tick):
     ''' calculates the x and y delta for a given obj using some physical rules
     dir = direction of travel
     is_land = is object travel on land or air
@@ -106,7 +110,11 @@ def physical_delta(dt, dir, is_land, oldva):
     # Vertical Force
     up_force = 0
     if dir & UP:
-        up_force += UPTHRUST
+        # Scale the uptrust based on how long ago the 
+        # key was pressed
+        modifier = 1.0 - min(UPTHRUST_DURATION, current_tick - last_uptick) / UPTHRUST_DURATION
+        print "m: %f l: %s c: %s" %(modifier, last_uptick, current_tick) 
+        up_force += UPTHRUST * modifier
     y_force = up_force - down_force
 
     # Acceleration

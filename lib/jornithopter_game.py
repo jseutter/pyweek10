@@ -26,8 +26,10 @@ class GameMode(mode.Mode):
 
     def __init__(self):
         mode.Mode.__init__(self)
-        self.characters = [Hero(self)]
+        self.hero = Hero(self)
+        self.characters = [self.hero]
         self.dir = 0 # initial keypress direction
+        self.current_tick = 0
 
     def on_key_press(self, sym, mods):
         if sym == key.SPACE:
@@ -38,6 +40,7 @@ class GameMode(mode.Mode):
             self.dir = self.dir | RIGHT
         elif sym == key.UP:
             self.dir = self.dir | UP
+            self.hero.last_uptick = self.current_tick
         else:
             return EVENT_UNHANDLED
         return EVENT_HANDLED
@@ -64,3 +67,8 @@ class GameMode(mode.Mode):
             c.draw()
         if DEBUG:
             debug_label.draw()
+ 
+    def tick(self):
+        """ Process a tick"""
+        self.current_tick += 1
+        print self.current_tick
