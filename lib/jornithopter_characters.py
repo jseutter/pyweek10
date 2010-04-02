@@ -113,7 +113,6 @@ def physical_delta(dt, dir, is_land, oldva, last_uptick, current_tick):
         # Scale the uptrust based on how long ago the 
         # key was pressed
         modifier = 1.0 - min(UPTHRUST_DURATION, current_tick - last_uptick) / UPTHRUST_DURATION
-        print "m: %f l: %s c: %s" %(modifier, last_uptick, current_tick) 
         up_force += UPTHRUST * modifier
     y_force = up_force - down_force
 
