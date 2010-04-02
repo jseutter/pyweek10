@@ -10,3 +10,6 @@ error.log
 
 # not sure where this file came from
 VERSION.txt
+
+# vim's ctags
+tags
