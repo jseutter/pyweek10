@@ -51,7 +51,10 @@ class GameMode(mode.Mode):
         elif sym == key.RIGHT:
             self.dir = self.dir & ~RIGHT
         elif sym == key.UP:
-            # We want to keep going up on a stroke self.dir = self.dir & ~UP
+            pass
+            # We want to keep going up on a stroke 
+            # the tick counter will kill the momentum
+            # self.dir = self.dir & ~UP
         else:
             return EVENT_UNHANDLED
         return EVENT_HANDLED

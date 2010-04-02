@@ -27,7 +27,7 @@ AIR,LAND = 0,1
 
 MASS        = 20    # kg (all travelling objects for now)
 UPTHRUST    = 300   # kg * m/s**2 (or what u call a Newton)
-UPTHRUST_DURATION   = 5 # Ticks until the upthrust is negated
+UPTHRUST_DURATION   = 20 # Ticks until the upthrust is negated
 SIDETHRUST  = 100   # kg * m/s**2
 GROUNDFRIC  = 40    # kg * m/s**2
 AIRFRIC     = 20    # kg * m/s**2
