@@ -49,9 +49,9 @@ class Hero(Character):
         if DEBUG:
             print 'IS_LAND:', is_land == LAND
         (dx,dy),(self.vx,self.vy,self.ax,self.ay) = physical_delta(
-            dt, dir, is_land, (self.vx, self.vy, self.ax, self.ay))
-        collide = self.parent.world.land_collide((self.x, self.y), (dx,dy), self.width,
+            dt, dir, is_land, (self.vx, self.vy, self.ax, self.ay), 
             self.last_uptick, self.parent.current_tick)
+        collide = self.parent.world.land_collide((self.x, self.y), (dx,dy), self.width)
         if collide is None:
             self.x += dx
             self.y += dy
@@ -116,6 +116,8 @@ def physical_delta(dt, dir, is_land, oldva, last_uptick, current_tick):
     if dir & UP:
         # Scale the uptrust based on how long ago the 
         # key was pressed
+        if DEBUG:
+            print "current_tick: %i, last_uptick: %i" % (current_tick, last_uptick)
         modifier = 1.0 - min(UPTHRUST_DURATION, current_tick - last_uptick) / UPTHRUST_DURATION
         up_force += UPTHRUST * modifier
     y_force = up_force - down_force

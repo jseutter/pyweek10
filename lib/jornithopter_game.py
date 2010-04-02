@@ -62,6 +62,9 @@ class GameMode(mode.Mode):
         return EVENT_HANDLED
 
     def update(self, dt):
+        self.current_tick += 1 
+        if DEBUG:
+            print "Current tick: %s" % (self.current_tick)
         for c in self.characters:
             c.update_pos(dt, self.dir)
 
@@ -76,5 +79,5 @@ class GameMode(mode.Mode):
  
     def tick(self):
         """ Process a tick"""
+        # This method is no longer called
         self.current_tick += 1
-        print self.current_tick
