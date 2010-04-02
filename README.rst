@@ -23,7 +23,7 @@ Othewise open a terminal / console and "cd" to the game directory and run:
 Play the Game
 -------------
 
-Arrows to steer, most other keys to flap
+Left and Right to steer, press up (repeatedly) to fly
 
 Land on top of other things to kill them.
 
