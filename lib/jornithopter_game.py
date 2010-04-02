@@ -17,6 +17,7 @@ from common import *
 from constants import *
 
 from jornithopter_characters import Hero
+from jornithopter_world import World
 
 game_label = text.Label("GAME", font_size=20)
 
@@ -30,6 +31,7 @@ class GameMode(mode.Mode):
         self.characters = [self.hero]
         self.dir = 0 # initial keypress direction
         self.current_tick = 0
+        self.world = World(self)
 
     def on_key_press(self, sym, mods):
         if sym == key.SPACE:
@@ -65,6 +67,7 @@ class GameMode(mode.Mode):
 
     def on_draw(self):
         self.window.clear()
+        self.world.draw()
         game_label.draw()
         for c in self.characters:
             c.draw()
