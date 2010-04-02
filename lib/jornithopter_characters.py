@@ -42,16 +42,20 @@ class Hero(Character):
     def update_pos(self, dt, dir):
         # this will be replaced by a call to the world with current x,y
         # to see if land or not. If/When we get a world instance
-        is_land = LAND
-        if self.y > 0:
-            is_land = AIR
+        is_land = self.parent.world.is_land((self.x, self.y), self.width)
+        if DEBUG:
+            print 'IS_LAND:', is_land == LAND
         (dx,dy),(self.vx,self.vy,self.ax,self.ay) = physical_delta(
             dt, dir, is_land, (self.vx, self.vy, self.ax, self.ay))
-        self.x += dx
-        self.y += dy
-        if self.y < 0:
-            self.y = 0
-        elif self.y + self.height > config.height:
+        collide = self.parent.world.land_collide((self.x, self.y), (dx,dy), self.width)
+        if collide is None:
+            self.x += dx
+            self.y += dy
+        else:
+            if DEBUG:
+                print 'COLLIDE'
+            self.x, self.y = collide
+        if self.y + self.height > config.height:
             self.y = config.height - self.height
         if self.x > config.width:
             self.x = 0
