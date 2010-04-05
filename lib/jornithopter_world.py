@@ -10,15 +10,14 @@ class World(object):
             setattr(self, k, getattr(self.parent, k))
         # world stuff
         # island width and height
-        self.lh = lw = 20
-        self.lw = lh = 150
-        self.delta = 50
+        lh = 20
+        lw = 150
         # island positions
         self.positions = [
-            ((config.width/4) - lw/2,   (config.height/4) - lh/2),
-            ((config.width*3/4) - lw/2, (config.height/4) - lh/2),
-            ((config.width*3/4) - lw/2, (config.height*3/4) - lh/2),
-            ((config.width/4) - lw/2,   (config.height*3/4) - lh/2),
+            ((config.width/4) - lw/2,   (config.height/4) - lh/2, lw, lh),
+            ((config.width*3/4) - lw/2, (config.height/4) - lh/2, lw, lh),
+            ((config.width*3/4) - lw/2, (config.height*3/4) - lh/2, lw, lh),
+            ((config.width/4) - lw/2,   (config.height*3/4) - lh/2, lw, lh),
         ]
 
     def is_land(self, p, w):
@@ -28,11 +27,10 @@ class World(object):
         '''
         print p,
         x,y = p
-        lw,lh = self.lw, self.lh
         if y <= 0: # easy one it is land
             print 'MAIN'
             return LAND
-        for xp,yp in self.positions:
+        for xp,yp,lw,lh in self.positions:
             if xp-w <= x <= xp + lw and yp+lh == y:
                 print 'X',xp,yp
                 return LAND
@@ -55,20 +53,18 @@ class World(object):
             xn = x + ndx 
             return (xn,yn)
         else:
-            for xp,yp in self.positions:
-                yp = yp + self.lh
+            for xp,yp,lw,lh in self.positions:
+                yp = yp + lh
                 if y >= yp and y+dy <= yp:
                     ndx = dx*(yp-y)/dy if dy != 0 else dx
                     xn = x + ndx
-                    if xp-w <= xn <= xp + self.lw:
+                    if xp-w <= xn <= xp + lw:
                         return (xn, yp)
         return None
 
 
     def draw(self):
-        lw,lh = self.lw, self.lh
-        for l in self.positions: # 4 islands
-            x,y = l
+        for x,y,lw,lh in self.positions: # islands
             ps = [
                 (x, y),
                 (x+lw, y),
