@@ -10,14 +10,13 @@ class World(object):
             setattr(self, k, getattr(self.parent, k))
         # world stuff
         # island width and height
-        lh = 20
-        lw = 150
-        # island positions
         self.positions = [
-            ((config.width/4) - lw/2,   (config.height/4) - lh/2, lw, lh),
-            ((config.width*3/4) - lw/2, (config.height/4) - lh/2, lw, lh),
-            ((config.width*3/4) - lw/2, (config.height*3/4) - lh/2, lw, lh),
-            ((config.width/4) - lw/2,   (config.height*3/4) - lh/2, lw, lh),
+            # ( x, y, width, height )
+            (50, 450, 250, 20),
+            (500, 450, 150, 20),
+            (100, 150, 150, 20),
+            (450, 150, 250, 20),
+            (250, 300, 300, 15),
         ]
 
     def is_land(self, p, w):
